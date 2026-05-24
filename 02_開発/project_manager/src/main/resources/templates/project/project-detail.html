@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layout :: layout(~{::section}, 'プロジェクト詳細')}">
+<section>
+    <div class="row g-3">
+        <div class="col-12 col-md-2">
+            <div class="text-secondary small">プロジェクトコード</div>
+            <div class="fw-semibold" th:text="${projectDetail?.projectCode ?: '-'}"></div>
+        </div>
+
+        <div class="col-12 col-md-8">
+            <div class="text-secondary small">プロジェクト名</div>
+            <div class="fw-semibold" th:text="${projectDetail?.projectName ?: '-'}"></div>
+        </div>
+
+        <div class="col-12 col-md-8">
+            <div class="text-secondary small">顧客名</div>
+            <div class="fw-semibold" th:text="${projectDetail?.clientName ?: '-'}"></div>
+        </div>
+
+        <div class="col-12 col-md-2">
+            <div class="text-secondary small">受注日</div>
+            <div class="fw-semibold" th:text="${projectDetail?.orderDate ?: '-'}"></div>
+        </div>
+
+        <div class="col-12 col-md-2">
+            <div class="text-secondary small">納品日</div>
+            <div class="fw-semibold" th:text="${projectDetail?.deliveryDate ?: '-'}"></div>
+        </div>
+
+        <div class="col-12">
+            <div class="text-secondary small">概要</div>
+            <div class="bg-light rounded px-3 py-2" style="min-height: 6rem; white-space: pre-wrap;"
+                th:text="${projectDetail?.description ?: '-'}"></div>
+        </div>
+
+        <div class="col-12 d-flex justify-content-between pt-2">
+            <a class="btn btn-secondary" th:href="@{/project/}">戻る</a>
+            <a class="btn btn-primary" th:href="@{/project/edit/(projectId=${projectId})}">編集</a>
+        </div>
+    </div>
+</section>
+
+</html>

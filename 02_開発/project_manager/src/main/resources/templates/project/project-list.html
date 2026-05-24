@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layout :: layout(~{::section}, 'プロジェクト一覧')}">
+<section>
+    <div class="d-flex justify-content-start gap-2 py-3">
+        <a class="btn btn-secondary" th:href="@{/}">戻る</a>
+        <a class="btn btn-primary" th:href="@{/project/edit/}">新規作成</a>
+    </div>
+</section>
+
+</html>

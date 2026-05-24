@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layout :: layout(~{::section}, ${pageTitle})}">
+<section>
+    <form th:action="@{/project/edit/}" method="post" class="row g-3" th:object="${projectEditForm}">
+        <input type="hidden" th:field="*{projectId}">
+
+        <div class="col-12 col-md-2">
+            <label for="projectCode" class="form-label">プロジェクトコード</label>
+            <input type="text" class="form-control" id="projectCode" th:field="*{projectCode}" maxlength="10"
+                th:classappend="${#fields.hasErrors('projectCode')} ? ' is-invalid' : ''">
+            <div class="invalid-feedback" th:errors="*{projectCode}"></div>
+        </div>
+
+        <div class="col-12 col-md-10">
+            <label for="projectName" class="form-label">プロジェクト名</label>
+            <input type="text" class="form-control" id="projectName" th:field="*{projectName}" maxlength="200"
+                th:classappend="${#fields.hasErrors('projectName')} ? ' is-invalid' : ''">
+            <div class="invalid-feedback" th:errors="*{projectName}"></div>
+        </div>
+
+        <div class="col-12 col-md-8">
+            <label for="clientId" class="form-label">顧客名</label>
+            <select class="form-select" id="clientId" th:field="*{clientId}"
+                th:classappend="${#fields.hasErrors('clientId')} ? ' is-invalid' : ''">
+                <option value="0">選択してください</option>
+                <option th:each="client : ${clientList}" th:value="${client.clientId}" th:text="${client.clientName}">
+                </option>
+            </select>
+            <div class="invalid-feedback" th:errors="*{clientId}"></div>
+        </div>
+
+        <div class="col-12 col-md-2">
+            <label for="orderDate" class="form-label">受注日</label>
+            <input type="date" class="form-control" id="orderDate" th:field="*{orderDate}"
+                th:classappend="${#fields.hasErrors('orderDate')} ? ' is-invalid' : ''">
+            <div class="invalid-feedback" th:errors="*{orderDate}"></div>
+        </div>
+
+        <div class="col-12 col-md-2">
+            <label for="deliveryDate" class="form-label">納品日</label>
+            <input type="date" class="form-control" id="deliveryDate" th:field="*{deliveryDate}"
+                th:classappend="${#fields.hasErrors('deliveryDate')} ? ' is-invalid' : ''">
+            <div class="invalid-feedback" th:errors="*{deliveryDate}"></div>
+        </div>
+
+        <div class="col-12">
+            <label for="description" class="form-label">概要</label>
+            <textarea class="form-control" id="description" th:field="*{description}" rows="4" maxlength="2000"
+                th:classappend="${#fields.hasErrors('description')} ? ' is-invalid' : ''"></textarea>
+            <div class="invalid-feedback" th:errors="*{description}"></div>
+        </div>
+
+        <div class="col-12 d-flex justify-content-between pt-2">
+            <a class="btn btn-secondary" th:href="${backPath}">戻る</a>
+            <button type="submit" class="btn btn-primary">保存</button>
+        </div>
+    </form>
+</section>
+
+</html>

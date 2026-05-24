@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tksystem.project_manager.domain.repository.ProjectRepository">
+
+    <select id="getProjectDetail"
+        parameterType="long"
+        resultType="com.tksystem.project_manager.domain.model.ProjectDetail">
+        SELECT
+            project_id,
+            project_code,
+            project_name,
+            client_id,
+            client_id::text AS client_name,
+            order_date,
+            delivery_date,
+            description
+        FROM
+            td_project
+        WHERE
+            project_id = #{projectId}
+    </select>
+
+    <select id="insertProject"
+        parameterType="com.tksystem.project_manager.domain.entity.Project"
+        resultType="long">
+        INSERT INTO td_project (
+            project_code,
+            project_name,
+            client_id,
+            order_date,
+            delivery_date,
+            description,
+            create_date,
+            created_by,
+            update_date,
+            updated_by
+        ) VALUES (
+            #{projectCode},
+            #{projectName},
+            #{clientId},
+            #{orderDate},
+            #{deliveryDate},
+            #{description},
+            CURRENT_TIMESTAMP,
+            #{createdBy},
+            CURRENT_TIMESTAMP,
+            #{updatedBy}
+        )
+        RETURNING project_id
+    </select>
+
+    <select id="updateProject"
+        parameterType="com.tksystem.project_manager.domain.entity.Project"
+        resultType="long">
+        UPDATE td_project
+        SET
+            project_code = #{projectCode},
+            project_name = #{projectName},
+            client_id = #{clientId},
+            order_date = #{orderDate},
+            delivery_date = #{deliveryDate},
+            description = #{description},
+            update_date = CURRENT_TIMESTAMP,
+            updated_by = #{updatedBy}
+        WHERE
+            project_id = #{projectId}
+        RETURNING project_id
+    </select>
+
+</mapper>
