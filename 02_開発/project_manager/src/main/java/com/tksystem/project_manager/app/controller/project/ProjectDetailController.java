@@ -38,7 +38,6 @@ public class ProjectDetailController {
                 .description(projectDetail.getDescription())
                 .build();
 
-        model.addAttribute("projectId", projectId);
         model.addAttribute("projectDetailForm", projectDetailForm);
         model.addAttribute("projectDetail", projectDetailForm);
 
